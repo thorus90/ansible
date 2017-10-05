@@ -1,0 +1,147 @@
+- name: Debian | copy mod_fcgid.conf
+  copy: src=fcgid.conf dest=/etc/apache2/mods-available/fcgid.conf
+  tags: apache
+  notify: reload apache2
+
+- name: Debian | disable default vhost
+  command: a2dissite 000-default
+  when: ansible_os_family == 'Debian'
+  register: command_result
+  changed_when: "'To activate new configuration' in command_result.stdout"
+  tags: apache
+  notify: reload apache2
+
+- name: Debian | Enable Basic Mods
+  command: a2enmod {{ item }}
+  with_items:
+    - rewrite
+    - ssl
+  when: ansible_os_family == 'Debian'
+  register: command_result
+  changed_when: "'Enabling module' in command_result.stdout"
+  tags: apache
+  notify: restart apache2
+
+#- name: Debian | ssl.conf
+#  copy: src=debian/ssl.conf dest=/etc/apache2/mods-enabled/ssl.conf
+#  notify: reload apache2
+#  tags: apache
+
+- name: Debian | Enable PHP Mods
+  command: a2enmod {{ item }}
+  with_items:
+    - suexec
+    - fcgid
+  when: "ansible_os_family == 'Debian' and apache.php == True"
+  register: command_result
+  changed_when: "'Enabling module' in command_result.stdout"
+  tags: apache
+  notify: restart apache2
+
+- name: Perl Installation
+  apt: name={{ item }}
+  with_items:
+    - libapache2-mod-perl2
+  when: "ansible_os_family == 'Debian' and apache.perl == True"
+  tags: apache
+  notify: restart apache2
+
+- name: Vhosts apache config
+  template: src=apache_vhost.j2 dest=/etc/apache2/sites-available/{{ item.domain }}.conf
+  with_items: "{{ apache.vhosts }}"
+  when: ansible_os_family == 'Debian' and item.state in ['enable','disable']
+  tags: apache
+  notify: restart apache2
+
+- name: create fcgid user
+  user: name={{ item.domain }} shell=/bin/false home=/var/www/{{ item.domain }}/ createhome=no
+  with_items: "{{ apache.vhosts }}"
+  when: apache.php and item.state in ['enable','disable']
+  tags: apache
+  notify: restart apache2
+
+- name: create dirs root
+  file: path="/var/www/{{item.0.domain}}/{{ item.1 }}" state=directory owner=root
+  with_nested:
+    - "{{ apache.vhosts }}"
+    - ["logs","etc"]
+  when: item.0.state in ['enable','disable']
+  tags: apache
+
+- name: create dirs fcgi_user
+  file: path="/var/www/{{ item.0.domain }}/{{ item.1 }}" state=directory owner={{ item.0.domain }} group={{ item.0.domain }} mode=0750
+  with_nested:
+    - "{{ apache.vhosts }}"
+    - ["htdocs","tmp","cgi-bin/cgi_wrapper"]
+  when: item.0.state in ['enable','disable']
+  tags: apache
+
+- name: Debian | add www-data to fcgi-group
+  user: name=www-data groups={{ item.domain }} append=yes
+  with_items: "{{ apache.vhosts }}"
+  when: ansible_os_family == 'Debian' and item.state in ['enable','disable']
+  tags: apache
+
+- name: PHP | fcgi-wrapper
+  template: src=php_wrapper.j2 dest=/var/www/{{ item.domain }}/cgi-bin/cgi_wrapper/php_wrapper owner={{ item.domain }} group={{ item.domain }} mode=0550
+  with_items: "{{ apache.vhosts }}"
+  when: apache.php and item.state in ['enable','disable']
+  tags:
+    - apache
+    - php
+  notify: restart apache2
+
+
+- name: PHP | ini
+  template: src=php_ini.j2 dest=/var/www/{{ item.domain }}/etc/php.ini
+  with_items: "{{ apache.vhosts }}"
+  when: apache.php and item.state in ['enable','disable']
+  tags:
+    - apache
+    - php
+  notify: restart apache2
+
+- name: Debian |  enable vhosts
+  command: a2ensite {{ item.domain }}
+  with_items: "{{ apache.vhosts }}"
+  when: ansible_os_family == 'Debian' and item.state in ['enable','disable']
+  register: command_result
+  changed_when: "'Enabling site' in command_result.stdout"
+  tags: apache
+  notify: restart apache2
+
+- name: Debian | disable vhosts to delete
+  command: a2dissite {{ item.domain }}
+  with_items: "{{ apache.vhosts }}"
+  when: ansible_os_family == 'Debian' and item.state == 'delete'
+  register: command_result
+  changed_when: "'To activate new configuration' in command_result.stdout"
+  tags:
+    - apache
+    - apachedelete
+  notify:
+    - reload apache2
+
+- name: delete /var dir
+  file: path=/var/www/{{ item.domain }} state=absent
+  with_items: "{{ apache.vhosts }}"
+  when: item.state == 'delete'
+  tags:
+    - apache
+    - apachedelete
+
+- name: delete user
+  user: name={{ item.domain }} state=absent
+  with_items: "{{ apache.vhosts }}"
+  when: item.state == 'delete'
+  tags:
+    - apache
+    - apachedelete
+
+- name: delete group
+  group: name={{ item.domain }} state=absent
+  with_items: "{{ apache.vhosts }}"
+  when: item.state == 'delete'
+  tags:
+    - apache
+    - apachedelete

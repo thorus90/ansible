@@ -1,0 +1,33 @@
+- name: get A-block from i-doit
+  local_action: shell ssh i-doit.intranet.jr0.de. "/var/www/i-doit.intranet.jr0.de/htdocs/controller -m bind9 -u admin -p admin -i 1 -zone {{ item }} -type A"
+  with_items: "{{ bind9.zones }}"
+  args:
+    executable: /bin/bash
+  register: bind9A
+  changed_when: False
+  tags:
+    - bind9
+
+- name: get PTR-block from i-doit
+  local_action: shell ssh i-doit.intranet.jr0.de. "/var/www/i-doit.intranet.jr0.de/htdocs/controller -m bind9 -u admin -p admin -i 1 -netaddr {{ item }} -type PTR"
+  with_items: "{{ bind9.nets }}"
+  args:
+    executable: /bin/bash
+  register: bind9PTR
+  changed_when: False
+  tags:
+    - bind9
+
+- name: /etc/bind9/A Zones
+  template: src=A dest=/etc/bind/zones/{{ item.item }}.conf
+  with_items: "{{ bind9A.results }}"
+  notify: restart bind9
+  tags:
+    - bind9
+
+- name: /etc/bind9/PTR Zones
+  template: src=PTR dest=/etc/bind/zones/{{ item.item }}.conf
+  with_items: "{{ bind9PTR.results }}"
+  notify: restart bind9
+  tags:
+    - bind9

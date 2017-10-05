@@ -1,0 +1,49 @@
+- name: Debian | Installation
+  apt: name={{ item }}
+  with_items:
+    - mysql-server
+    - python-mysqldb
+    - pwgen
+  tags:
+    - mysql
+
+# Buggy Shit!
+#- name: create mysql root pass
+#  command: /usr/bin/pwgen -s 15 1
+#  register: mysql_root_passwd
+#  tags:
+#    - mysqlsetpass
+#    - mysql
+
+#- name: update mysql root passwd
+#  mysql_user: name=root host={{ item }} password={{ mysql_root_passwd.stdout }}
+#  with_items:
+#    - "{{ ansible_hostname }}"
+#    - 127.0.0.1
+#    - ::1
+#    - localhost
+#  tags:
+#    - mysql
+#    - mysqlsetpass
+
+#- name: copy user my.cnf file with root passwd credentials
+#  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+#  tags:
+#    - mysql
+
+#- name: delete anonymous mysql user
+#  mysql_user: name="" state=absent
+#  tags:
+#    - mysql
+ 
+#- name: remove mysql test database
+#  mysql_db: name=test state=absent
+#  tags:
+#    - mysql
+
+- name: mysqldump script
+  copy: src=mydump dest=/usr/sbin/mydump owner=root group=root mode=0750
+
+- name: mysqldump cron
+  template: src=mydump-cron dest=/etc/cron.d/mydump owner=root group=root mode=0644
+  

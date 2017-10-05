@@ -1,0 +1,4 @@
+#!/bin/bash
+# INCLUDED
+
+fw -A INPUT -j LOGDROP

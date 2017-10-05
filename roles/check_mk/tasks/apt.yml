@@ -1,0 +1,29 @@
+- name: APT | add omd repo
+  copy: src=omd.list dest=/etc/apt/sources.list.d/omd.list
+  tags:
+    - checkmk
+
+- name: APT | add key for repo
+  apt_key: keyserver=keys.gnupg.net id=F8C1CA08A57B9ED7 state=present
+  tags:
+    - checkmk
+
+- name: APT | check_mk installation
+  apt: update_cache=yes name={{ item }}
+  with_items:
+    - omd
+  tags:
+    - checkmk
+
+- name: Debian | Enable Basic Mods
+  command: a2enmod {{ item }}
+  with_items:
+    - rewrite
+    - ssl
+  when: ansible_os_family == 'Debian'
+  register: command_result
+  changed_when: "'Enabling module' in command_result.stdout"
+  tags: 
+    - checkmk
+    - apache
+  notify: restart apache2

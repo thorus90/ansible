@@ -1,0 +1,5 @@
+net-analyzer/check_mk livestatus wato
+media-libs/gd jpeg png
+net-analyzer/rrdtool perl
+net-analyzer/pnp4nagios apache2
+dev-lang/php cgi

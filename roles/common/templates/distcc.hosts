@@ -1,0 +1,5 @@
+{% if common.network.subnet == '192.168.100.0/23' %}
+server server-backup seafile
+{% else %}
+srv thorus-pc
+{% endif %}

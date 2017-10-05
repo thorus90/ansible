@@ -1,0 +1,21 @@
+common:
+  managed_by: 'jr'
+  users:
+    - name: root
+      homedir: '/root/'
+  additional_packages:
+    - rsync
+  additional_yaourt_packages:
+    - rar
+  network:
+    subnet: '192.168.100.0/23'
+  portage:
+    inetsync: False
+    layman: False
+    fetcher: False
+    updateKernel: True
+    mountpoint: True
+  apt:
+    backports: False
+  distcc:
+    host: "client"

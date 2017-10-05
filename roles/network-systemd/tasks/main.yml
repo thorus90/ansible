@@ -1,0 +1,11 @@
+- name: network.conf
+  template: src=network.conf dest=/etc/systemd/network/50-dhcp.network
+  when: "networksystemd.dhcp == True"
+  tags: 
+    - network
+
+- name: enable systemd-networkd
+  service: name=systemd-networkd enabled=yes
+  when: "networksystemd.dhcp == True"
+  tags: 
+    - network

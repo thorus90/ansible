@@ -1,0 +1,10 @@
+- name: restart ntpd
+  service: name=ntp state=restarted
+- name: restart xinetd
+  service: name=xinetd state=restarted
+
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: restart distccd
+  service: name=distccd state=restarted

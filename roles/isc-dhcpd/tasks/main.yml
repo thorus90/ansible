@@ -1,0 +1,15 @@
+
+- name: isc-dhcpd | get host-block from i-doit
+  local_action: shell ssh i-doit.intranet.jr0.de. "/var/www/i-doit.intranet.jr0.de/htdocs/controller -m isc_dhcpd -u admin -p admin -i 1 -netaddr {{ iscdhcpd.subnet }} -type host-block"
+  args:
+    executable: /bin/bash
+  register: hostblock
+  changed_when: "hostblock.stdout == 'Never changed, because no way to determine if changed'"
+  tags:
+    - isc-dhcpd
+
+- name: isc-dhcpd | /etc/dhcp/dhcpd.conf
+  template: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  notify: restart dhcpd
+  tags:
+    - isc-dhcpd

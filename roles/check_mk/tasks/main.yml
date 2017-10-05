@@ -1,0 +1,5 @@
+- include_tasks: portage.yml
+  when: ansible_distribution == 'Gentoo'
+
+- include_tasks: apt.yml
+  when: ansible_distribution == 'Debian'

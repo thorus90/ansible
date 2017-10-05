@@ -1,0 +1,13 @@
+- name: create configdir
+  file: path="{{ item.homedir }}.config/terminator/" state=directory
+  with_items: "{{common.users | default([])}}"
+  when: common.managed_by == 'jr'
+  tags:
+    - terminator
+
+- name: config
+  copy: src=config dest="{{ item.homedir }}.config/terminator/"
+  with_items: "{{common.users | default([])}}"
+  when: common.managed_by == 'jr'
+  tags:
+    - terminator

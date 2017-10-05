@@ -1,0 +1,5 @@
+#!/bin/bash
+# INCLUDED
+
+fwextern -A INPUT -p tcp --dport http -m conntrack --ctstate NEW -j ACCEPT
+fwextern -A INPUT -p tcp --dport https -m conntrack --ctstate NEW -j ACCEPT

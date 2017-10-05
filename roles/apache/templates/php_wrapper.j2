@@ -1,0 +1,10 @@
+#!/bin/sh
+
+umask 002
+
+export PHPRC=/var/www/{{ item.domain }}/etc
+export TMPDIR=/var/www/{{ item.domain }}/tmp
+export TMP=/var/www/{{ item.domain }}/tmp
+export TEMP=/var/www/{{ item.domain }}/tmp
+
+exec {{ item.php_executable }}

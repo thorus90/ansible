@@ -1,0 +1,20 @@
+iscdhcpd:
+  daemonname: "isc-dhcp-server"
+  authoritative: True
+  subnet: "192.168.99.0"
+  netmask: "255.255.255.0"
+  domainname: "intranet.jr0.de"
+  domainnameservers: "192.168.99.254"
+  ntpservers: "192.168.99.254"
+  broadcastaddress: "192.168.99.255"
+  routers: "192.168.99.254"
+  range: "192.168.99.210 192.168.99.240"
+  defaultleasetime: 691200
+  maxleasetime: 1209600
+  ddns: False
+  ddnskey: "nHAoMVDBeh5+0XYeA6Ai7Q==;"
+  #hostblockprepend: Undefined
+  #hostblockappend: Undefined
+  #staticroutes: Undefined
+  #classlessroutes: Undefined
+  #netbiosnameservers: Undefined

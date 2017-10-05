@@ -1,0 +1,35 @@
+    DocumentRoot /var/www/{{ item.domain }}/htdocs
+
+    <Directory /var/www/{{ item.domain }}/htdocs>
+        Options -Indexes +ExecCGI +FollowSymLinks -MultiViews
+        AllowOverride all
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    <FilesMatch \.php$>
+        SetHandler none
+    </FilesMatch>
+
+    {% if item.php == True %}
+        SuexecUserGroup {{ item.domain }} {{ item.domain }}
+        AddHandler fcgid-script .php
+        AddHandler fcgid-script .html
+
+        {% if ansible_os_family == 'RedHat' and ansible_distribution_major_version == '5' %}
+            FCGIWrapper /var/www/{{ item.domain }}/cgi-bin/cgi_wrapper/php_wrapper .php
+        {% else %}
+            FcgidWrapper /var/www/{{ item.domain }}/cgi-bin/cgi_wrapper/php_wrapper .php
+            FcgidWrapper /var/www/{{ item.domain }}/cgi-bin/cgi_wrapper/php_wrapper .html
+        {% endif %}
+
+    {% endif %}
+
+    LogLevel warn
+
+    ErrorLog "/var/www/{{ item.domain }}/logs/error.log"
+    CustomLog "/var/www/{{ item.domain }}/logs/access.log"  combined
+
+    {% if item.include == true %}
+    Include include.d/{{ item.domain }}.conf
+    {% endif %}

@@ -1,0 +1,23 @@
+- name: pvelocalhost Eintrag
+  lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4['address'] }} {{ ansible_fqdn }} {{ ansible_hostname }} pvelocalhost" regexp="^{{ ansible_default_ipv4['address'] }}"
+
+- name: APT | Key
+  apt_key: url="http://download.proxmox.com/debian/key.asc"
+
+- name: APT | Repository
+  apt_repository: repo="deb http://download.proxmox.com/debian jessie pve-no-subscription"
+
+- name: APT | Installation
+  apt: name=proxmox-ve
+
+- name: APT | Entferne PVE Enterprise Repository
+  file: path=/etc/apt/sources.list.d/pve-enterprise.list state=absent
+
+- name: APT | Erlaube Deinstallation des aktiven Kernels
+  debconf: name="linux-image-{{ ansible_kernel }}" question="linux-image-{{ ansible_kernel }}/prerm/removing-running-kernel-3.2.0-4-amd64" vtype="boolean" value="false"
+
+- name: APT | Entferne nicht PVE Kernel
+  apt: name="linux-image-*" state=absent
+
+- name: GUI | remove check for license
+  command: sed -i.bak "s/data.status !== 'Active'/false/g" /usr/share/pve-manager/js/pvemanagerlib.js

@@ -1,0 +1,58 @@
+set -b
+HISTSIZE=500000
+HISTFILESIZE=5000000
+HISTTIMEFORMAT='%F %T '
+# because of failing autocompletion with spaces
+shopt -u progcomp
+alias ll='ls -lha --color=always'
+alias ls='ls --color=always'
+alias vi='vim'
+alias cd..='cd ..'
+alias claer='clear'
+alias distccmon-text='DISTCC_DIR="/var/tmp/portage/.distcc/" distccmon-text'
+alias tailmes='tail -f -n 50 /var/log/messages'
+alias playMusik="mplayer -shuffle -playlist /daten/Eigene\ Dateien/Eigene\ Musik/Musik/playlist.txt"
+alias logs="cd /storage/export/data/98-jobs/logs/"
+alias jobs="cd /storage/export/jobs/"
+alias jobsp="cd /storage/export/jobs/php/"
+alias jobss="cd /storage/export/jobs/shell/"
+alias catmes="cat /var/log/messages"
+alias sshserver-backup="ssh root@server-backup"
+alias sshserver="ssh -p665 root@rottmann-moebel.dyndns.org"
+alias usb="/etc/init.d/net.usb0 start"
+alias usbre="/etc/init.d/net.usb0 restart"
+alias watchepisode="./home/thorus/Desktop/Staffel\ 5/serie"
+alias akku="watch --i=1 acpi -V"
+alias flaggie="LANG=en_US.utf-8 flaggie"
+alias duf='du -sk .[!.]* * | sort -n | while read size fname; do for unit in k M G T P E Z Y; do if [ $size -lt 1024 ]; then echo -e "${size}${unit}\t${fname}"; break; fi; size=$((size/1024)); done; done'
+alias settlers4="wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Settlers\ IV/S4.exe"
+##########################
+##### Kernel Commands ####
+##########################
+alias kernelmake="make -j5 && make modules_install"
+alias kernelmenueconfig="cd /usr/src/linux; make menuconfig"
+alias kernelcd="cd /usr/src/linux"
+##########################
+#### PATH Anpassung ######
+##########################
+PATH="$PATH:/root/scripts"
+##########################
+### Prompt Aenderung ####
+##########################
+if [[ $EUID -ne 0 ]]; then
+    PS1='$( echo $?;) \u@\h@\e[1;31m\[\]\t\e[m \w\n # \[\]'
+else
+    PS1='${prefixPS1} $( echo $?;) \h@\e[1;31m\[\]\t\e[m \w\n # \[\]'
+fi
+#/*
+# * SSH Aliases
+# * /
+alias sshzeddi="ssh h2110162.stratoserver.net"
+
+
+hostname=$(hostname)
+
+if [[ "$hostname" == "pi" ]]
+then
+    alias pacmd="sudo PULSE_RUNTIME_PATH=/var/run/pulse -u pulse pacmd"
+fi

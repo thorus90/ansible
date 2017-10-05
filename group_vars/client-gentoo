@@ -1,0 +1,3 @@
+common:
+    ipv6: False
+    managed_by: 'jr'

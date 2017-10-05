@@ -1,0 +1,34 @@
+#!/bin/bash
+
+OLDDUMP=14
+DATE01=`date +%Y%m%d`
+BACKUPDIR=/var/backups/db-dump
+USER="root"
+
+# exists "$BACKUPDIR"
+if [ ! -d $BACKUPDIR ]; then
+  mkdir -p $BACKUPDIR
+fi
+
+# make one directory for each day
+cd $BACKUPDIR
+
+if [ -d dump-$DATE01 ]; then
+  rm -r dump-$DATE01
+fi
+
+mkdir dump-$DATE01
+
+logger -p local7.notice -t BACKUP "Daily Mysql Backup start"
+for i in $(mysql -u$USER --disable-column-names -Be 'show databases;' | awk '! /information_schema/ && ! /lost\+found/ && ! /performance_schema/');
+        do
+                mysqldump -f --events --ignore-table=mysql.events -u$USER $i | bzip2 -9 > $BACKUPDIR/dump-$DATE01/$i.sql.bz2;
+        done;
+logger -p local7.notice -t BACKUP "Daily Mysql Backup finished"
+# change permission on the new dump-files
+chmod -R 400 $BACKUPDIR/dump-$DATE01/*
+
+# remove old dump-files and the seperate directory
+for a in `find $BACKUPDIR/dump* -mtime +$OLDDUMP -type d`; do rm -r $a; done
+
+exit 0

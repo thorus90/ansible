@@ -1,0 +1,5 @@
+- name: save firewall
+  service: name=firewall state=restarted
+
+- name: load firewall
+  service: name=firewall state=reloaded

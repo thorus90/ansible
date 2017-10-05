@@ -1,0 +1,22 @@
+- name: flags
+  copy: src=flags dest=/etc/portage/package.use/check_mk.conf
+  tags: check_mk
+
+- name: accept_keywords
+  copy: src=keywords dest=/etc/portage/package.accept_keywords/check_mk.conf
+  tags: check_mk
+
+- name: install basic packages
+  portage: package={{item}} state=present
+  with_items:
+    - net-analyzer/check_mk
+    - net-analyzer/pnp4nagios
+  tags: check_mk
+
+- name: post check_mk install
+  file: dest=/etc/nagios/htpasswd.users mode=660 owner=nagios state=file
+  tags: check_mk
+
+- name: apache2 conf.d
+  copy: src=apache2-confd dest=/etc/conf.d/apache2
+  tags: check_mk

@@ -1,0 +1,14 @@
+#!/bin/bash
+# INCLUDED
+
+fw -P INPUT ACCEPT
+fw -P OUTPUT ACCEPT
+fw -P FORWARD DROP
+
+fw -N LOGDROP
+fw -A LOGDROP -j LOG --log-level 4 --log-prefix "FIREWALL: "
+fw -A LOGDROP -j DROP
+
+fw -A INPUT -i lo -j ACCEPT
+fw -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+service tcp ssh

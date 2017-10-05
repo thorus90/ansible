@@ -1,0 +1,10 @@
+#!/bin/bash
+
+fw -P INPUT ACCEPT
+fw -P OUTPUT ACCEPT
+fw -P FORWARD DROP
+
+fw -F
+fw -X
+fw4 -t nat -F
+fw4 -t nat -X

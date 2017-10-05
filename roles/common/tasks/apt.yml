@@ -1,0 +1,57 @@
+- name: APT | Repository Konfiguration
+  template: src=apt/sources.list dest=/etc/apt/sources.list
+  register: sources_list
+  tags: update
+  when: ansible_machine != "armv6l" and ansible_machine != "armv7l" and ansible_distribution == 'Debian'
+
+- name: APT | automatic apt-get update
+  copy: src=apt/90-custom dest=/etc/apt/apt.conf.d/90-custom
+  tags: update
+
+- name: APT | Updates Forced
+  apt: update_cache=yes upgrade=dist
+  when: sources_list|changed
+  tags: update
+
+- name: APT | Updates Cached
+  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+  tags: update
+
+- name: NTP | Installation
+  apt: name={{ item }}
+  with_items:
+    - ntp
+    - ntpdate
+  tags: ntp
+
+- name: APT | Installation der Basis Pakete
+  apt: name={{ item }}
+  with_items:
+    - htop
+    - sysstat
+    - ethstatus
+    - iotop
+    - iftop
+    - nmap
+    - vim
+    - less
+    - curl
+    - wget
+    - cron
+    - anacron
+    - fail2ban
+    - at
+    - zip
+    - unzip
+    - bash-completion
+    - python3
+    - tcpdump
+    - gnutls-bin
+    - parted
+    - dnsutils
+    - nmon
+    - xinetd
+
+- name: APT | Installiere individuelle pakete pro server
+  apt: name={{ item }}
+  with_items: "{{common.additional_packages | default([])}}"

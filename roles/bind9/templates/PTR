@@ -1,0 +1,12 @@
+$TTL 3d
+@		IN SOA		{{ ansible_fqdn }}	hostmaster.{{ ansible_fqdn }} (
+				2711100902	; serial
+				8H		; refresh
+				2H		; retry
+				4W		; expiry
+				1D )		; minimum
+        IN NS       {{ ansible_fqdn }}.
+
+{{ item.stdout }}
+
+$INCLUDE "/etc/bind/zones/{{ item.item }}.extra.conf"

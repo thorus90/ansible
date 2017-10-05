@@ -1,0 +1,15 @@
+$TTL    1800
+@       IN      SOA     {{ ansible_fqdn }}.  hostmaster.{{ ansible_fqdn }}. (
+                12546862        ; Serial
+                604800         ; Refresh
+                86400         ; Retry
+                2419200         ; Expire
+                604800 )       ; Negative Cache TTL
+jr0.de.                          IN NS           {{ ansible_fqdn }}.
+
+
+{% include '{{ item.item }}.A_Records' ignore missing %}
+
+
+{{ item.stdout }}
+$INCLUDE "/etc/bind/zones/{{ item.item }}.extra.conf"

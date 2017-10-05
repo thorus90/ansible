@@ -1,0 +1,79 @@
+- name: Arch Servers
+  hosts: server-arch
+  remote_user: root
+  roles:
+    - common
+
+- name: Gentoo Servers
+  hosts: server-gentoo
+  remote_user: root
+  roles:
+    - common
+
+- name: Debian Servers
+  hosts: server-debian
+  remote_user: root
+  roles:
+    - common
+
+- name: dhcp servers
+  hosts: server-dhcpd
+  remote_user: root
+  roles:
+    - isc-dhcpd
+
+- name: dns servers
+  hosts: server-dns
+  remote_user: root
+  roles:
+    - bind9
+
+- name: network-systemd
+  hosts: network-systemd
+  remote_user: root
+  roles:
+    - network-systemd
+
+- name: Arch Clients
+  hosts: client-arch
+  remote_user: root
+  roles:
+    - common
+    - terminator
+
+- name: Debian Clients
+  hosts: client-debian
+  remote_user: root
+  roles:
+    - common
+
+- name: proxmox
+  hosts: proxmox
+  remote_user: root
+  roles:
+    - proxmox
+
+- name: check_mk
+  hosts: check_mk
+  remote_user: root
+  roles:
+    - check_mk
+
+- name: Webservers
+  hosts: apache
+  remote_user: root
+  roles:
+    - apache
+    - mysql
+
+- name: drummer firewall
+  hosts: firewall-drummer
+  remote_user: root
+  roles:
+    - firewall
+
+- name: mysql server
+  hosts: mysqld
+  remote_user: root
+  roles:
+    - mysqld

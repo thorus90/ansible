@@ -1,0 +1,10 @@
+#!/bin/bash
+# INCLUDED
+
+for icmptype in echo-request destination-unreachable time-exceeded; do
+    fw4 -A INPUT -p icmp --icmp-type $icmptype -j ACCEPT
+done
+
+for icmptype in destination-unreachable time-exceeded echo-request router-advertisement neighbour-solicitation neighbour-advertisement; do
+    fw6 -A INPUT -p icmpv6 --icmpv6-type $icmptype -j ACCEPT
+done

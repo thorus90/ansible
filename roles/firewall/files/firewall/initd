@@ -1,0 +1,38 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          firewall
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Required-Start:
+# Required-Stop:
+# Short-Description: Loading firewall
+# Description:       This script loads the firewall rules
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+failmsg() {
+    log_failure_msg
+    exit 1
+}
+
+case $1 in
+    start|restart|load|reload|force-reload)
+        invoke-rc.d fail2ban stop
+        log_daemon_msg "Loading firewall" iptables
+        /usr/sbin/firewallctl start || failmsg
+        log_success_msg
+        invoke-rc.d fail2ban start
+    ;;
+
+    stop|save)
+        invoke-rc.d fail2ban stop
+        log_daemon_msg "Saving firewall" "iptables ip6tables"
+        /usr/sbin/firewallctl stop || failmsg
+        log_success_msg
+    ;;
+
+    status)
+        /usr/sbin/firewallctl status
+    ;;
+esac

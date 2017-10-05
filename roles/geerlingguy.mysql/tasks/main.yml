@@ -1,0 +1,28 @@
+---
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define mysql_packages.
+  set_fact:
+    mysql_packages: "{{ __mysql_packages | list }}"
+  when: mysql_packages is not defined
+
+- name: Define mysql_daemon.
+  set_fact:
+    mysql_daemon: "{{ __mysql_daemon }} "
+  when: mysql_daemon is not defined
+
+# Setup/install tasks.
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+# Configure MySQL.
+- include_tasks: configure.yml
+- include_tasks: secure-installation.yml
+- include_tasks: databases.yml
+- include_tasks: users.yml
+- include_tasks: replication.yml

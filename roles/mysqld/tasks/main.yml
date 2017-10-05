@@ -1,0 +1,9 @@
+- name: "create all the dbs"
+  mysql_db: state=present name="{{ item }}"
+  with_items:
+    - "{{ mysqld.dbs }}"
+
+- name: "create Users with priv"
+  mysql_user: name="{{ item.name }}" password="{{ item.password }}" encrypted=yes host="{{ item.host }}" priv="{{ item.priv }}" state=present
+  with_items:
+    - "{{ mysqld.users }}"

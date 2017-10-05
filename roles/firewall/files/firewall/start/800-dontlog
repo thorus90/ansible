@@ -1,0 +1,9 @@
+#!/bin/bash
+# INCLUDED
+
+# DHCP
+fw4 -A INPUT -p udp --dport 67:68 -j DROP
+
+# Multicast
+fw4 -A INPUT -s 0.0.0.0 -d 224.0.0.0/8 -j DROP
+fw6 -A INPUT -p icmpv6 --icmpv6-type 130 -j DROP #(Multicast Listener Discovery)

@@ -1,0 +1,4 @@
+- name: copy shortcuts
+  copy: src="local-bin/" dest="/usr/local/bin/" owner=root group=root mode=0755 
+  tags:
+    - gnome

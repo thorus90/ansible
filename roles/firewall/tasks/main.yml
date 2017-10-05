@@ -1,0 +1,44 @@
+- name: Firewall | Installieren
+  copy: src=firewall/firewallctl dest=/usr/sbin/firewallctl mode=0755
+  notify: load firewall
+  tags: firewall
+
+- name: Firewall | Init
+  copy: src=firewall/initd dest=/etc/init.d/firewall mode=0755
+  notify: load firewall
+  tags: firewall
+
+- name: Firewall | Konfigurationsverzeichnis
+  file: path=/etc/firewall state=directory
+  tags: firewall
+
+- name: Firewall | Task Verzeichnisse
+  file: path=/etc/firewall/{{ item }} state=directory
+  with_items:
+    - start
+    - stop
+  notify: load firewall
+  tags: firewall
+
+- name: Firewall | Basis Tasks
+  copy: src=firewall/{{ item }}/ dest=/etc/firewall/{{ item }}/
+  with_items:
+    - start
+    - stop
+  notify: load firewall
+  tags: firewall
+
+- name: Firewall | Stat Interfaces
+  stat: path=/etc/firewall/interfaces
+  register: intstat
+  tags: firewall
+
+- name: Firewall | Erstelle Interfaces
+  lineinfile: line="EXTERN={{ ansible_default_ipv4['alias'] }}" dest=/etc/firewall/interfaces create=true
+  notify: load firewall
+  when: not intstat.stat.exists
+  tags: firewall
+
+- name: Firewall | Systemstart
+  service: name=firewall enabled=yes
+  tags: firewall

@@ -1,0 +1,71 @@
+- name: create user for yaourt
+  user: home=/home/yaourt/ groups=wheel name=yaourt shell=/bin/sh
+
+- name: create dir for yaourt
+  file: owner=yaourt path=/home/yaourt/aur state=directory
+
+- name: config sudoers that wheel is allowed to exec without password
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+- name: copy script to install yaourt
+  copy: src=yaourt_install.sh dest=/home/yaourt/yaourt_install.sh owner=yaourt mode=744
+  
+- name: execute script to install yaourt
+  command: ./yaourt_install.sh
+  args:
+    chdir: /home/yaourt/
+  become: true
+  become_user: "yaourt"
+  become_method: "su"
+
+- name: install basic packages
+  pacman: name="{{ item }}" state=present
+  with_items:
+    - vim
+    - rsync
+    - screen
+    - wgetpaste
+    - iftop
+    - nmap
+    - tcpdump
+    - htop
+    - xorg-xauth
+    - traceroute
+    - iperf
+    - iperf3
+    - bind-tools
+    - bash-completion
+    - xinetd
+    - base-devel
+
+- name: install additional packages from pacman
+  pacman: name="{{ item }}" state=present
+  with_items: "{{ common.additional_packages }}"
+
+- name: install packages from aur
+  aur: name="{{ item }}" user=yaourt
+  with_items:
+    - check_mk-agent
+
+- name: install additional packages from aur
+  aur: name="{{ item }}" user=yaourt
+  with_items: "{{ common.additional_yaourt_packages }}"
+
+- name: update pacman
+  pacman: update_cache=yes upgrade=yes
+  tags:
+    - update
+    - upgrade
+
+- name: update yaourt
+  command: "yaourt -Syu --aur --noconfirm"
+  become: true
+  become_user: "yaourt"
+  become_method: "su"
+  tags:
+    - update
+    - upgrade

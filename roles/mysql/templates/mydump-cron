@@ -1,0 +1,3 @@
+MAILTO="ddio@jr0.de"
+
+00 3 * * * root /usr/sbin/mydump

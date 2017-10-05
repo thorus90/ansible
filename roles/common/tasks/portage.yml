@@ -1,0 +1,208 @@
+- name: mount portage
+  shell: "mountpoint /usr/portage || mount /usr/portage"
+  register: command_result
+  tags:
+    - update
+    - portagemount
+    - sync
+  when: common.portage.mountpoint == True
+  changed_when: '"is not a mountpoint" in command_result.stdout'
+
+- name: mount portage/distfiles
+  shell: "mountpoint /usr/portage/distfiles || mount /usr/portage/distfiles"
+  tags:
+    - update
+    - portagemount
+    - sync
+  when: common.portage.mountpoint == True
+  changed_when: '"is not a mountpoint" in command_result.stdout'
+
+- name: use flags and keywords
+  copy: src="{{item}}" dest="/etc/portage/"
+  with_items:
+    - ["package.use","package.accept_keywords"]
+  tags:
+    - portage
+
+- name: install basic packages
+  portage: package={{item}} state=present quiet=yes
+  with_items:
+    - app-editors/vim
+    - app-misc/screen
+    - app-portage/eix
+    - app-portage/flaggie
+    - app-text/wgetpaste
+    - net-analyzer/ifstatus
+    - net-analyzer/iftop
+    - net-analyzer/nmap
+    - net-analyzer/tcpdump
+    - sys-process/htop
+    - x11-apps/xauth
+    - app-portage/gentoolkit
+    - net-analyzer/traceroute
+    - net-misc/iperf
+    - net-dns/bind-tools
+    - sys-devel/distcc
+    - app-shells/bash-completion
+    - net-analyzer/check_mk
+    - sys-apps/xinetd
+
+- name: install additional packages
+  portage: package={{item}} state=present quiet=yes
+  with_items: "{{ common.additional_packages }}"
+
+- name: remove if installed
+  portage: package={{item}} state=absent quiet=yes
+  with_items:
+    - app-admin/syslog-ng
+    - app-portage/cfg-update
+    - net-misc/dhcpcd
+
+- name: generate repos.conf/gentoo.conf
+  template: src=repos.conf/gentoo.conf dest=/etc/portage/repos.conf/gentoo.conf owner=root group=root
+  tags:
+    - update
+    - sync
+
+- name: sync all repos
+  portage: sync=yes quiet=yes
+  tags:
+    - update
+    - sync
+
+- name: sync overlays
+  command: "layman -S"
+  when: common.portage.layman == True
+  tags:
+    - update
+    - sync
+  
+
+- name: eix-update
+  command: "eix-update"
+  tags:
+    - update
+    - sync
+
+- name: fetch all packages first
+  command: "emerge -DufN world"
+  tags:
+    - update
+    - upgrade
+  when: common.portage.fetcher == True
+
+- name: update sys-apps/portage
+  portage: package=sys-apps/portage update=yes quiet=yes oneshot=yes
+  tags:
+    - update
+    - upgrade
+
+- name: update sys-devel/gcc
+  portage: package=sys-devel/gcc update=yes quiet=yes oneshot=yes
+  register: gccupdate
+  tags:
+    - update
+    - upgrade
+
+- name: activate new gcc
+  command: "gcc-config 1"
+  when: gccupdate.changed
+  tags:
+    - update
+    - upgrade
+
+- name: update sys-kernel/gentoo-sources
+  portage: package=sys-kernel/gentoo-sources update=yes quiet=yes oneshot=yes
+  register: kernelupdate
+  tags:
+    - update
+    - upgrade
+  when: common.portage.updateKernel == True
+
+- name: copy actual kernelconfig to /usr/src/linux/
+  shell: "zcat /proc/config.gz > /usr/src/linux/.config"
+  when: kernelupdate.changed
+  tags:
+    - update
+    - upgrade
+
+- name: make olddefconfig
+  command: make olddefconfig
+  args:
+    chdir: /usr/src/linux
+  when: kernelupdate.changed
+  tags:
+    - update
+    - upgrade
+
+- name: make && make modules_install
+  shell: make -j {{ ansible_processor_cores + 1}} && make modules_install
+  args:
+    chdir: /usr/src/linux
+  when: kernelupdate.changed
+  tags:
+    - update
+    - upgrade
+
+- name: copy new kernel to /boot
+  shell: "cp /usr/src/linux/arch/x86/boot/bzImage /boot/kernel-$(equery list -F '$version' gentoo-sources | tail -1)"
+  when: kernelupdate.changed
+  tags:
+    - update
+    - upgrade
+ 
+- name: update grub config
+  command: "grub-mkconfig -o /boot/grub/grub.cfg" 
+  when: kernelupdate.changed
+  tags:
+    - update
+    - upgrade
+
+- name: update world
+  portage: package=@world deep=yes update=yes newuse=yes keepgoing=yes quiet=yes
+  register: command_result
+  ignore_errors: True
+  tags:
+    - update
+    - upgrade
+
+- name: update world with backtrack 1000
+  command: "emerge -qDuvN world --keep-going=y --with-bdeps=y --backtrack=1000 --exclude=gentoo-sources"
+  environment: 
+    FEATURES: "-distcc"
+  when: "command_result.rc == 1"
+  tags:
+    - update
+    - upgrade
+
+- name: make module-rebuild (nvidia etc)
+  portage: package=@module-rebuild quiet=yes
+  tags:
+    - update
+    - upgrade
+
+- name: make preserved-rebuild
+  portage: package=@preserved-rebuild quiet=yes
+  tags:
+    - update
+    - upgrade
+
+- name: depclean
+  portage: depclean=yes quiet=yes
+  register: depclean
+  tags:
+    - update
+    - upgrade
+
+- name: distcc | distcc.service.d
+  template: src=distccd.service.d dest=/etc/systemd/system/distccd.service.d/00gentoo.conf owner=root group=root
+  tags: distcc
+  notify: 
+    - reload systemd
+    - restart xinetd
+
+- name: distcc | distcc.hosts
+  template: src=distcc.hosts dest=/etc/distcc/hosts
+  tags: distcc
+  notify:
+    - restart xinetd

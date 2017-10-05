@@ -1,0 +1,5 @@
+#!/bin/bash
+# INCLUDED
+
+fw -A INPUT -p tcp --dport 135:138 -j DROP
+fw -A INPUT -p udp --dport 135:138 -j DROP

@@ -1,0 +1,21 @@
+source ~/.profile
+
+hostname=$(hostname)
+user=$(whoami)
+
+if [[ "$hostname" == "thorus-pc" || "$hostname" == "srv" ]]
+then
+        eval $(ssh-agent) &> /dev/null
+        ssh-add &> /dev/null
+fi
+
+if [[ "$hostname" == "heiner" ]]
+then
+    alias s="ssh root@srv"
+    alias jd="sudo systemctl start rinetd"
+fi
+
+if [[ "$user" != "root" ]]
+then
+    alias updatedb="sudo updatedb"
+fi

@@ -1,0 +1,10 @@
+[client]
+user = root
+password = {{ mysql_root_passwd.stdout }}
+
+[mysql]
+password = "{{ mysql_root_passwd.stdout }}"
+
+[mysqldump]
+password = "{{ mysql_root_passwd.stdout }}"
+

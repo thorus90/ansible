@@ -1,0 +1,112 @@
+#!/bin/bash
+
+set -e
+
+mkdir -p /etc/firewall/rules
+
+failmsg() {
+    exit 1
+}
+
+trap failmsg SIGTERM SIGINT
+
+fw4() {
+    iptables $@
+}
+
+fw6() {
+    ip6tables $@
+}
+
+fw() {
+    fw4 $@
+    fw6 $@
+}
+
+fwintern() {
+    for interface in $INTERN; do
+        fw -i $interface $@
+    done
+}
+
+fwextern() {
+    for interface in $EXTERN; do
+        fw -i $interface $@
+    done
+}
+
+fw4intern() {
+    for interface in $INTERN; do
+        fw4 -i $interface $@
+    done
+}
+
+fw4extern() {
+    for interface in $EXTERN; do
+        fw4 -i $interface $@
+    done
+}
+
+fw6intern() {
+    for interface in $INTERN; do
+        fw6 -i $interface $@
+    done
+}
+
+fw6extern() {
+    for interface in $EXTERN; do
+        fw6 -i $interface $@
+    done
+}
+
+service() {
+    fw -A INPUT -p $1 --dport $2 -m conntrack --ctstate NEW -j ACCEPT
+}
+
+service_intern() {
+    fwintern -A INPUT -p $1 --dport $2 -m conntrack --ctstate NEW -j ACCEPT
+}
+
+service_extern() {
+    fwextern -A INPUT -p $1 --dport $2 -m conntrack --ctstate NEW -j ACCEPT
+}
+
+do_start() {
+    do_stop
+    . /etc/firewall/interfaces
+    for task in /etc/firewall/start/*; do
+        . $task
+    done
+}
+
+do_stop() {
+    . /etc/firewall/interfaces
+    for task in /etc/firewall/stop/*; do
+        . $task
+    done
+}
+
+status() {
+    echo "#####################################################"
+    iptables -L -v -x --line-numbers $@
+    echo "#####################################################"
+    ip6tables -L -v -x --line-numbers $@
+}
+
+case $1 in
+    start)
+        do_start
+    ;;
+
+    stop)
+        do_stop
+    ;;
+
+    status)
+        if [ ! -z "$2" ] && [ "$2" == "-n" ]; then
+            status -n
+        else
+            status
+        fi
+    ;;
+esac
