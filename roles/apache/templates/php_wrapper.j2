@@ -7,4 +7,8 @@ export TMPDIR=/var/www/{{ item.domain }}/tmp
 export TMP=/var/www/{{ item.domain }}/tmp
 export TEMP=/var/www/{{ item.domain }}/tmp
 
+{% if item.php_executable is defined %}
 exec {{ item.php_executable }}
+{% else %}
+exec /usr/bin/php-cgi
+{% endif %}

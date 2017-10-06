@@ -16,7 +16,11 @@ safe_mode_include_dir =
 safe_mode_exec_dir =
 safe_mode_allowed_env_vars = PHP_
 safe_mode_protected_env_vars = LD_LIBRARY_PATH
+{% if item.php_ini_disable_functions is defined %}
 disable_functions = {{ item.php_ini_disable_functions }}
+{% else %}
+disable_funtions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source
+{% endif %}
 disable_classes =
 zend.enable_gc = On
 expose_php = Off

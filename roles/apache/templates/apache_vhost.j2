@@ -1,4 +1,8 @@
+{% if item.listen_http is defined %}
+<VirtualHost {{ item.listen_http }}>
+{% else %}
 <VirtualHost *:80>
+{% endif %}
     ServerName {{ item.domain }}
     ServerAlias www.{{ item.domain }}
     {% if item.aliases is defined %}
@@ -16,7 +20,11 @@
 </VirtualHost>
 
 {% if item.ssl_cert %}
+{% if item.listen_https is defined %}
+<VirtualHost {{ item.listen_https }}>
+{% else %}
 <VirtualHost {{ item.ip }}:443>
+{% endif %}
     ServerName {{ item.domain }}
     ServerAlias www.{{ item.domain }}
     {% if item.aliases is defined %}
