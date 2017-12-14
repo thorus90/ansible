@@ -5,7 +5,7 @@
   apt_key: url="http://download.proxmox.com/debian/key.asc"
 
 - name: APT | Repository
-  apt_repository: repo="deb http://download.proxmox.com/debian jessie pve-no-subscription"
+  apt_repository: repo="deb http://download.proxmox.com/debian stretch pve-no-subscription"
 
 - name: APT | Installation
   apt: name=proxmox-ve
