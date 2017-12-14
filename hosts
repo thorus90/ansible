@@ -3,16 +3,15 @@ minecraft
 template.intranet.jr0.de
 server-backup
 seafile
-
-[server-gentoo]
-server.intranet.jr0.de
+samba
+squid
 
 [server-debian]
 checkmk.intranet.jr0.de
 buero-hv-01.intranet.jr0.de
 i-doit.intranet.jr0.de
 pi
-pi-street.intranet.jr0.de
+street-pi
 privat-sarah-hv.intranet.jr0.de
 privat-leo-receiver.intranet.jr0.de
 zoneminder.intranet.jr0.de
@@ -40,13 +39,13 @@ thorus-pc
 minecraft.intranet.jr0.de
 mysql.intranet.jr0.de
 seafile.intranet.jr0.de
-server.intranet.jr0.de
 server-backup
 template.intranet.jr0.de
+squid
 
 
 [client-arch]
-192.168.99.220
+192.168.99.5
 heiner.intranet.jr0.de
 srv
 thorus-pc
@@ -55,13 +54,15 @@ thorus-pc
 buero-pi
 
 [proxmox]
-privat-sarah-hv.intranet.jr0.de
-buero-hv-01.intranet.jr0.de
+privat-sarah-hv
+buero-hv-01
+buero-hv-02
 
 [apache]
 web.rottmann-moebel.de
 i-doit.intranet.jr0.de
 apache2
+pi
 
 [firewall-drummer]
 web.rottmann-moebel.de

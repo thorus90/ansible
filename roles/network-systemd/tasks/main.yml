@@ -5,7 +5,13 @@
     - network
 
 - name: enable systemd-networkd
-  service: name=systemd-networkd enabled=yes
+  service: name=systemd-networkd enabled=yes state=started
+  when: "networksystemd.dhcp == True"
+  tags: 
+    - network
+
+- name: enable systemd-resolved
+  service: name=systemd-resolved enabled=yes state=started
   when: "networksystemd.dhcp == True"
   tags: 
     - network

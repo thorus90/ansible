@@ -4,12 +4,6 @@
   roles:
     - common
 
-- name: Gentoo Servers
-  hosts: server-gentoo
-  remote_user: root
-  roles:
-    - common
-
 - name: Debian Servers
   hosts: server-debian
   remote_user: root
@@ -77,3 +71,9 @@
   remote_user: root
   roles:
     - mysqld
+
+- name: openwrt-servers
+  hosts: openwrt
+  remote_user: root
+  roles:
+    - isc-dhcpd

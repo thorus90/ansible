@@ -31,7 +31,10 @@
   when: ansible_os_family == 'Debian'
 
 - include_tasks: pacman.yml
-  when: ansible_os_family == 'Arch Linux'
+  when: ansible_os_family == 'Archlinux'
+  tags:
+    - update
+    - upgrade
 
 - name: copy xinetd check_mk
   copy: src=xinet-check_mk dest="/etc/xinetd.d/check_mk" mode=644
