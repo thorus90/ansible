@@ -1,0 +1,8 @@
+common:
+  additional_packages:
+    - rsync
+  users:
+    - name: root
+      homedir: '/root/'
+    - name: tamtam
+      homedir: '/home/tamtam/'

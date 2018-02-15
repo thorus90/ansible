@@ -1,0 +1,28 @@
+iscdhcpd:
+  staticroutes: "192.168.100.0 192.168.99.139, 192.168.101.0 192.168.99.139, 192.168.200.0 192.168.99.139, 192.168.201.0 192.168.99.139, 10.0.0.1 192.168.99.139"
+  classlessroutes: "24, 192,168,100, 192,168,99,139, 24, 192,168,101, 192,168,99,139, 24, 192,168,200, 192,168,99,139, 24, 192,168,201, 192,168,99,139, 0, 192,168,99,254 , 24, 10,0,0, 192,168,99,139"
+  domainnameservers: "192.168.99.139, 192.168.99.254"
+  range: "192.168.99.200 192.168.99.230"
+bind9:
+  zones:
+    - "intranet.jr0.de"
+  nets:
+    - 192.168.99.0
+    - 192.168.100.0
+    - 192.168.101.0
+    - 192.168.200.0
+    - 192.168.201.0
+apache:
+  php: True
+  perl: False
+  vhosts:
+    - domain: "kodi.jr0.de"
+      aliases:
+        - "pi.intranet.jr0.de"
+      ip: "*"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+      ssl_key: "/etc/ssl/private/ssl-cert-snakeoil.key"
+      include: False

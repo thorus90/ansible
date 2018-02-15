@@ -1,0 +1,15 @@
+common:
+  additional_packages:
+    - rsync
+  additional_yaourt_packages:
+    - seafile-client
+    - anydesk
+  users:
+    - name: root
+      homedir: '/root/'
+    - name: thorus
+      homedir: '/home/thorus/'
+    - name: jrottmann
+      homedir: '/home/jrottmann/'
+  network:
+    subnet: '192.168.99.0/24'

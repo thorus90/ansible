@@ -1,0 +1,197 @@
+common:
+  apt:
+    backports: True
+  additional_packages:
+    - php5-mysql
+    - php5-curl
+    - libapache2-mod-wsgi-py3
+    - python3-mysql.connector
+apache:
+  php: True
+  perl: False
+  vhosts:
+    - domain: "forum.rottmann-moebel.de"
+      aliases:
+        - "forum.derbienenkorb.de"
+        - "leon.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: True
+      php: True
+      ssl_cert: "/etc/letsencrypt/live/forum.derbienenkorb.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/forum.derbienenkorb.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/forum.derbienenkorb.de/fullchain.pem"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/letsencrypt/live/www.rottmann-moebel.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/www.rottmann-moebel.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/www.rottmann-moebel.de/fullchain.pem"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "blog.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/apache2/ssl/blog.rottmann-moebel.de.crt"
+      ssl_key: "/etc/apache2/ssl/blog.rottmann-moebel.de.key"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "ddns.jr0.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/apache2/ssl/vs.rottmann-moebel.de.crt"
+      ssl_key: "/etc/apache2/ssl/vs.rottmann-moebel.de.key"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,system,popen,multi_exec,show_source"
+    - domain: "shop.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: True
+      php: True
+      ssl_cert: "/etc/letsencrypt/live/shop.rottmann-moebel.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/shop.rottmann-moebel.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/shop.rottmann-moebel.de/fullchain.pem"
+      include: False
+      php_executable: "/opt/php-5.5/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "ferienwohnung.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/apache2/ssl/blog.rottmann-moebel.de.crt"
+      ssl_key: "/etc/apache2/ssl/blog.rottmann-moebel.de.key"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "vs.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: False
+      php: True
+      ssl_cert: "/etc/apache2/ssl/blog.rottmann-moebel.de.crt"
+      ssl_key: "/etc/apache2/ssl/blog.rottmann-moebel.de.key"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "kpanel.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: True
+      php: False
+      ssl_cert: "/etc/apache2/ssl/blog.rottmann-moebel.de.crt"
+      ssl_key: "/etc/apache2/ssl/blog.rottmann-moebel.de.key"
+      include: True
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "webmail.rottmann-moebel.de"
+      ip: "37.120.191.237"
+      state: "enable"
+      ssl_only: True
+      php: True
+      ssl_cert: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/fullchain.pem"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+
+mysqld:
+  dbs:
+    - leon_forum
+    - blog_rottmann_moebel_de
+    - magento
+    - mon_check 
+    - rottmann_moebel_de
+    - kpanel
+    - roundcube
+  users:
+    - name: leon_forum
+      host: '%'
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            31313438356238306133333231393532323836633236306236323333306431653465326332653363
+            3835306264666533663265353564653436653461613336380a363635386161636435666134343362
+            64366366376235386339316562323836356663353861653331623733336230313735663332383462
+            6537363836636638660a313139316266646466353133343838633935633634326133643434653132
+            62313261343338396631373434323062633031306332333563666563393063386238353339326465
+            3635626666343632393462346539646339373763396238333637
+      priv: "leon_forum.*:ALL"
+    - name: icinga
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            33383738313464343036313161626239343964333965626165386234316339393333383663323033
+            6232333436396333613433366466626661316634646662620a376237383139323365373731613765
+            31326230623731353063353233666332343835636264323135616432663362633833643565313330
+            3130643338366533300a626131356636356332663362393030386230393239636134303166633637
+            36386535376431323366326431306664633132653265396532393037393331316337363432376538
+            3461323461646464653938663231303965646239643635616662
+      priv: "mon_check.*:SELECT"
+    - name: rottmann_moebel
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            34653662663630356535333362613836356661633732363633353031653766333338656330623135
+            3230323432623434633434613534636139653730316233360a356365393732336236616439383233
+            66346431376361326161373334376132393962343439653133663361626131643238373665373761
+            3365306534343765340a316639373463303838343263363665386364616336336661386435323338
+            30623138633761353764373065386236353866366631353964383932633332363765323261363763
+            6437363139646263666566356430303135336466653738636366
+      priv: "rottmann_moebel_de.*:ALL"
+    - name: blog_rottmann
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            37343662376465333464313335363035353463326365383135656636333938646433323164313765
+            3363326432356335356164653030333631373031663938360a346632623763383332643266313131
+            38316337333638623635313162333963323333393431303139393261343732373930393330323233
+            3532323866643535330a656562316230336333323762336232616361623063386263333030636263
+            34333265346138616236613836343265323635616230363435653663366562613136646133363631
+            6162343162396338366331623136303231613031663264613566
+      priv: "blog_rottmann_moebel_de.*:ALL"
+    - name: magento
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            63623039653032353230316633646663336463653131363365616563323061633039663730616633
+            3737626363353236653039326665636361626263393666650a333432626234323463336165323161
+            66663333373434653139626332646261323939646235323764663937653638386365343466313863
+            6430633161643561300a396237383339366138656135373038643433376362383763333937633231
+            37333866663562393233343135636666666532643036653861666165643565633730363364336631
+            6438363838323238363536326637393036616432353363636463
+      priv: "magento.*:ALL"
+    - name: kpanel
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            63616334313861626438326233396332313330636632323763343536326136386634323864653438
+            3837613433323031326234636164323531623163313032310a396532376334373437646633376231
+            65383864663839613664643035656632643762396131366138336538373631326437633938396132
+            6130646165623035620a346634303737623132393166306235663037623933383132623637306533
+            65313866336537336639613235626463333664326463396165323034316339653165386332313031
+            3237633331393539353530666237343063333265656339653761
+      priv: "kpanel.*:ALL"
+    - name: roundcube
+      host: localhost
+      password: !vault |
+            $ANSIBLE_VAULT;1.1;AES256
+            63303135656165353765316463326533616366343061626663633736383939663661623066636432
+            3139346230613761336537393138623833366163663434640a353263636366366537366261336636
+            36663630623533393737383230646437393636306339663931323830623338346565623365353439
+            3835316465363564330a323937393735666338326661653134313838303630306432303034323230
+            63326537303161383632303034333334306338636438643666306239353864393564666565653834
+            6135313937363433386239396436363432383262326337333430
+      priv: "roundcube.*:ALL"

@@ -1,0 +1,35 @@
+common:
+  additional_packages:
+    - pwgen
+    - unrar
+    - cuda
+    - strace
+    - steam
+    - kodi
+    - mumble
+    - nfs-utils
+    - samba
+    - sshfs
+    - pidgin
+    - iperf
+    - youtube-dl
+    - mlocate
+    - chromium
+    - firefox
+    - terminator
+  additional_yaourt_packages:
+    - jre
+    - anydesk
+    - rinetd
+    - seafile-client
+    - jdownloader2
+  users:
+    - name: root
+      homedir: '/root/'
+    - name: thorus
+      homedir: '/storage/sda/thorus/'
+  network:
+    subnet: '192.168.99.0/24'
+networksystemd:
+    dhcp: True
+    interfacematch: 'eth*'

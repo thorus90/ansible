@@ -1,0 +1,41 @@
+common:
+  additional_packages:
+    - pwgen
+    - unrar
+    - vim
+    - steam
+    - mumble
+    - clementine
+    - teamspeak3
+    - mediainfo
+    - mpv
+    - tcpdump
+    - nmap
+    - samba
+    - sshfs
+    - pidgin
+    - freerdp
+    - youtube-dl
+    - mlocate
+    - chromium
+    - firefox
+    - terminator
+    - exfat-utils
+    - mtpfs
+    - ntfs-3g
+    - bridge-utils
+  additional_yaourt_packages:
+    - anydesk
+    - rinetd
+    - seafile-client
+    - soundcloud-dl-git
+    - roccat-tools
+  users:
+    - name: root
+      homedir: '/root/'
+    - name: thorus
+      homedir: '/home/thorus/'
+network:
+  subnet: '192.168.99.0/24'
+networksystemd:
+  interfacematch: 'br0'

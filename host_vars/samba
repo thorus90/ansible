@@ -1,0 +1,18 @@
+common:
+  additional_packages:
+    - unzip
+    - bash-completion
+    - mlocate
+    - poppler
+    - catdoc
+    - unrar
+    - perl-image-exiftool
+  users:
+    - name: root
+      homedir: '/root/'
+  network:
+    subnet: '192.168.100.0/24'
+networksystemd:
+    dhcp: True
+network:
+    interfacematch: 'ens*'

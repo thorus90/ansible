@@ -1,0 +1,19 @@
+common:
+  additional_packages:
+    - screen
+    - bash-completion
+    - mlocate
+    - backuppc
+    - apache
+    - perl-file-rsyncp
+  additional_yaourt_packages:
+    - mod_perl
+  users:
+    - name: root
+      homedir: '/root/'
+  network:
+    subnet: '192.168.101.0/24'
+networksystemd:
+    dhcp: True
+network:
+    interfacematch: 'ens*'

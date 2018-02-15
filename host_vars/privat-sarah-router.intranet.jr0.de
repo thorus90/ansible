@@ -1,0 +1,34 @@
+iscdhcpd:
+  daemonname: "dhcpd"
+  authoritative: True
+  subnet: "192.168.101.0"
+  netmask: "255.255.255.0"
+  domainname: "intranet.jr0.de"
+  domainnameservers: "192.168.100.254 8.8.8.8"
+  ntpservers: "192.168.100.254"
+  broadcastaddress: "192.168.101.255"
+  routers: "192.168.101.254"
+  range: "192.168.101.210 192.168.101.240"
+  defaultleasetime: 691200
+  maxleasetime: 1209600
+  ddns: True
+  ddnskey: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35323864353539653839343636376265303834646464316364623664656134356236666338396265
+          3364363666623962353236646266343736653838643661320a303265616266363032356362343230
+          36633465396638636535323161656438663830623761356637626431626166306439303662353732
+          3938343766313765610a306366663262393034663239303866373866306432666230316335303834
+          66626335306239346631666435386438623565336362616535643562643530363935
+  #hostblockprepend: Undefined
+  hostblockappend: "host privat-renate.intranet.jr0.de {
+        hardware ethernet 94:39:e5:6c:68:02;
+        deny booting;
+    }
+
+    host privat-renate-handy.intranet.jr0.de {
+        hardware ethernet 84:38:38:34:e1:02;
+        deny booting;
+    }"
+  #staticroutes: Undefined
+  #classlessroutes: Undefined
+  #netbiosnameservers: Undefined

@@ -9,7 +9,6 @@ squid
 [server-debian]
 checkmk.intranet.jr0.de
 buero-hv-01.intranet.jr0.de
-i-doit.intranet.jr0.de
 pi
 street-pi
 privat-sarah-hv.intranet.jr0.de
@@ -32,6 +31,7 @@ bind9
 
 [mysqld]
 mysql
+web.rottmann-moebel.de
 
 [network-systemd]
 srv
@@ -60,7 +60,6 @@ buero-hv-02
 
 [apache]
 web.rottmann-moebel.de
-i-doit.intranet.jr0.de
 apache2
 pi
 
