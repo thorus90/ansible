@@ -1,0 +1,8 @@
+common:
+  users:
+    - name: root
+      homedir: '/root/'
+      ssh_keys:
+        - mugnipper
+        - backup
+        - monitoring

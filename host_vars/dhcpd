@@ -4,7 +4,7 @@ iscdhcpd:
   subnet: "192.168.100.0"
   netmask: "255.255.255.0"
   domainname: "intranet.jr0.de"
-  domainnameservers: "192.168.100.252"
+  domainnameservers: "192.168.100.252, 192.168.100.235"
   ntpservers: "192.168.100.254"
   broadcastaddress: "192.168.100.255"
   routers: "192.168.100.254"

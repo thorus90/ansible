@@ -2,14 +2,20 @@ common:
   additional_packages:
     - rsync
   additional_yaourt_packages:
-    - seafile-client
+    - nextcloud-client
     - anydesk
   users:
     - name: root
       homedir: '/root/'
+      ssh_keys:
+        - mugnipper
     - name: thorus
       homedir: '/home/thorus/'
+      ssh_keys:
+        - mugnipper
     - name: jrottmann
       homedir: '/home/jrottmann/'
+      ssh_keys:
+        - mugnipper
   network:
     subnet: '192.168.99.0/24'

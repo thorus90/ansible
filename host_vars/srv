@@ -26,8 +26,18 @@ common:
   users:
     - name: root
       homedir: '/root/'
-    - name: thorus
-      homedir: '/storage/sda/thorus/'
+      ssh_keys:
+        - mugnipper
+        - monitoring
+        - tamtam
+    - name: mugnipper
+      homedir: '/home/mugnipper/'
+      ssh_keys:
+        - mugnipper
+    - name: tamtam
+      homedir: '/home/tamtam/'
+      ssh_keys:
+        - tamtam
   network:
     subnet: '192.168.99.0/24'
 networksystemd:

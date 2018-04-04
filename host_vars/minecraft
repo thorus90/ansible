@@ -7,9 +7,6 @@ common:
     - jre
     - minecraft
     - teamspeak3-server
-  users:
-    - name: root
-      homedir: '/root/'
   network:
     subnet: '192.168.100.0/24'
 networksystemd:

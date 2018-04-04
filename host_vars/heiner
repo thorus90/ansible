@@ -4,5 +4,10 @@ common:
   users:
     - name: root
       homedir: '/root/'
+      ssh_keys: 
+        - mugnipper
+        - tamtam
     - name: tamtam
       homedir: '/home/tamtam/'
+      ssh_keys:
+        - tamtam

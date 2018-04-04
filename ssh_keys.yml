@@ -1,0 +1,5 @@
+- name: deploy ssh_keys
+  hosts: linux
+  remote_user: root
+  roles:
+    - linux_ssh_keys

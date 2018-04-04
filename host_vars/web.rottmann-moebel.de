@@ -14,7 +14,7 @@ apache:
       aliases:
         - "forum.derbienenkorb.de"
         - "leon.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: True
       php: True
@@ -25,7 +25,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: False
       php: True
@@ -36,7 +36,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "blog.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: False
       php: True
@@ -46,7 +46,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "ddns.jr0.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: False
       php: True
@@ -56,7 +56,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,system,popen,multi_exec,show_source"
     - domain: "shop.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: True
       php: True
@@ -67,7 +67,7 @@ apache:
       php_executable: "/opt/php-5.5/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "ferienwohnung.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: False
       php: True
@@ -77,7 +77,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "vs.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: False
       php: True
@@ -87,7 +87,7 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "kpanel.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: True
       php: False
@@ -97,9 +97,20 @@ apache:
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "webmail.rottmann-moebel.de"
-      ip: "37.120.191.237"
+      ip: "185.233.105.67"
       state: "enable"
       ssl_only: True
+      php: True
+      ssl_cert: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/fullchain.pem"
+      include: False
+      php_executable: "/usr/bin/php-cgi"
+      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
+    - domain: "derbienenkorb.de"
+      ip: "185.233.105.67"
+      state: "enable"
+      ssl_only: False
       php: True
       ssl_cert: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/privkey.pem"

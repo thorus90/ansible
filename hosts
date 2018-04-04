@@ -17,17 +17,19 @@ zoneminder.intranet.jr0.de
 web.rottmann-moebel.de
 mysql
 bind9
+bind
 dhcpd
 apache2
 
 [server-dhcpd]
-pi
+pi 
 dhcpd
 privat-sarah-router.intranet.jr0.de
 
 [server-dns]
 pi
 bind9
+bind
 
 [mysqld]
 mysql
@@ -46,7 +48,7 @@ squid
 
 [client-arch]
 starfire
-heiner.intranet.jr0.de
+heiner
 srv
 thorus-pc
 
@@ -61,13 +63,10 @@ buero-hv-02
 [apache]
 web.rottmann-moebel.de
 apache2
-pi
+pi gather_subset=!hardware
 
 [firewall-drummer]
 web.rottmann-moebel.de
 
 [check_mk]
 checkmk.intranet.jr0.de
-
-[openwrt]
-privat-sarah-router.intranet.jr0.de

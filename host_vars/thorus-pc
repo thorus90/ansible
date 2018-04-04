@@ -33,8 +33,13 @@ common:
   users:
     - name: root
       homedir: '/root/'
+      ssh_keys:
+        - mugnipper
+        - backup
     - name: thorus
       homedir: '/home/thorus/'
+      ssh_keys:
+        - mugnipper
 network:
   subnet: '192.168.99.0/24'
 networksystemd:
