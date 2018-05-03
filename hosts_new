@@ -35,3 +35,9 @@ linux-server-rmg
 linux-client-rmg
 linux-server-jr
 linux-client-jr
+
+[windows-clients-rmg]
+buero-renate
+
+[windows:children]
+windows-clients-rmg

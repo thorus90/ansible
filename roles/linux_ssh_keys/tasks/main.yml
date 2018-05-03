@@ -1,9 +1,0 @@
-- name: "deploy ssh_keys for every user"
-  template:
-    src: "ssh_keys"
-    dest: "{{ item.homedir }}.ssh/authorized_keys"
-    mode: 0600
-    owner: "{{ item.name }}"
-    group: root
-  with_items:
-    - "{{ common.users }}"

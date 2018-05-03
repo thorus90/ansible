@@ -1,0 +1,30 @@
+Protocol 2
+AddressFamily inet
+ClientAliveInterval 20
+
+LogLevel INFO
+
+PermitRootLogin prohibit-password
+AuthorizedKeysFile  .ssh/authorized_keys
+ChallengeResponseAuthentication no
+
+AllowAgentForwarding yes
+PermitUserEnvironment yes
+X11Forwarding yes
+AcceptEnv LANG LC_*
+
+PrintMotd no
+PrintLastLog no
+
+UsePAM yes
+UseDNS no
+
+Subsystem   sftp    /usr/lib/ssh/sftp-server
+
+{% if ssh.sftp.allow == True %}
+Match Group sftp
+    ForceCommand internal-sftp
+    ChrootDirectory %h
+    X11Forwarding no
+    AllowTcpForwarding no
+{% endif %}

@@ -1,0 +1,5 @@
+- name: configure ssh
+  hosts: linux
+  remote_user: root
+  roles:
+    - linux_ssh

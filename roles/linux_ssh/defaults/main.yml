@@ -21,3 +21,7 @@ ssh_keys_storage:
     - 'environment="REALUSER=tamtam@rudolph" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDa0hsKV/t4ZvgqTYfuS3GN+6/SqfxH62795AwsoFPnv tamtam@rudolph'
     - 'environment="REALUSER=root@heiner" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOlXZHhXgyThjyPtMlcHQ3D/9vFQzbwElRfBq6r+en1B root@heiner'
     - 'environment="REALUSER=root@heiner" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFKeo20ez4BhxP9D4oFkCDyCQcbGQd2ELsAZ9/04dBnm tamtam@heiner'
+
+ssh:
+  sftp:
+    allow: False
