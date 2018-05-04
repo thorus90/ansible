@@ -1,0 +1,12 @@
+deb http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }} main non-free contrib
+deb-src http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }} main non-free contrib
+
+deb http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }}-updates main non-free contrib
+deb-src http://ftp.de.debian.org/debian/ {{ ansible_distribution_release }}-updates main non-free contrib
+
+deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free
+deb-src http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free
+
+{% if apt_backports == True %}
+deb http://http.debian.net/debian {{ ansible_distribution_release }}-backports main
+{% endif %}

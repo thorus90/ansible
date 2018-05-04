@@ -4,3 +4,6 @@ Host *
   ServerAliveInterval 300
   ServerAliveCountMax 2
   StrictHostKeyChecking no
+{% if proxmox %}
+  SendEnv LC_PVE_*
+{% endif %}

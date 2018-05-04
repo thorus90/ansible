@@ -1,6 +1,5 @@
+apt_backports: True
 common:
-  apt:
-    backports: True
   additional_packages:
     - php5-mysql
     - php5-curl

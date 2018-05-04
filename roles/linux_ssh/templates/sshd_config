@@ -12,6 +12,9 @@ AllowAgentForwarding yes
 PermitUserEnvironment yes
 X11Forwarding yes
 AcceptEnv LANG LC_*
+{% if proxmox %}
+AcceptEnv LC_PVE_*
+{% endif %}
 
 PrintMotd no
 PrintLastLog no

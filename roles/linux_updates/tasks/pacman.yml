@@ -1,0 +1,10 @@
+- name: update pacman
+  pacman: 
+    update_cache: yes
+    upgrade: yes
+
+- name: update yaourt
+  command: "yaourt -Syu --aur --noconfirm"
+  become: true
+  become_user: "yaourt"
+  become_method: "su"

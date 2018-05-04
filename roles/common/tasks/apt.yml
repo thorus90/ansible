@@ -1,21 +1,22 @@
-- name: APT | Repository Konfiguration
-  template: src=apt/sources.list dest=/etc/apt/sources.list
-  register: sources_list
-  tags: update
-  when: ansible_machine != "armv6l" and ansible_machine != "armv7l" and ansible_distribution == 'Debian'
-
-- name: APT | automatic apt-get update
-  copy: src=apt/90-custom dest=/etc/apt/apt.conf.d/90-custom
-  tags: update
-
-- name: APT | Updates Forced
-  apt: update_cache=yes upgrade=dist
-  when: sources_list|changed
-  tags: update
-
-- name: APT | Updates Cached
-  apt: update_cache=yes upgrade=dist cache_valid_time=3600
-  tags: update
+# done by new playbook
+#- name: APT | Repository Konfiguration
+#  template: src=apt/sources.list dest=/etc/apt/sources.list
+#  register: sources_list
+#  tags: update
+#  when: ansible_machine != "armv6l" and ansible_machine != "armv7l" and ansible_distribution == 'Debian'
+#
+#- name: APT | automatic apt-get update
+#  copy: src=apt/90-custom dest=/etc/apt/apt.conf.d/90-custom
+#  tags: update
+#
+#- name: APT | Updates Forced
+#  apt: update_cache=yes upgrade=dist
+#  when: sources_list|changed
+#  tags: update
+#
+#- name: APT | Updates Cached
+#  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+#  tags: update
 
 - name: NTP | Installation
   apt: name={{ item }}

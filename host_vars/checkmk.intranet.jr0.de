@@ -1,3 +1,1 @@
-common:
-  apt:
-    backports: True
+apt_backports: True

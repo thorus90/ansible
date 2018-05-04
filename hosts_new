@@ -5,10 +5,10 @@ server-backup
 samba
 squid
 checkmk
-buero-hv-01 
-buero-hv-02
+buero-hv-01 proxmox=True
+buero-hv-02 proxmox=True
 street-pi
-privat-sarah-hv 
+privat-sarah-hv proxmox=True
 privat-leo-receiver
 zoneminder
 web.rottmann-moebel.de

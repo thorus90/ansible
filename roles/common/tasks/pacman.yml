@@ -55,17 +55,18 @@
   aur: name="{{ item }}" user=yaourt
   with_items: "{{ common.additional_yaourt_packages }}"
 
-- name: update pacman
-  pacman: update_cache=yes upgrade=yes
-  tags:
-    - update
-    - upgrade
-
-- name: update yaourt
-  command: "yaourt -Syu --aur --noconfirm"
-  become: true
-  become_user: "yaourt"
-  become_method: "su"
-  tags:
-    - update
-    - upgrade
+# handled by new playbook
+# - name: update pacman
+#   pacman: update_cache=yes upgrade=yes
+#   tags:
+#     - update
+#     - upgrade
+# 
+# - name: update yaourt
+#   command: "yaourt -Syu --aur --noconfirm"
+#   become: true
+#   become_user: "yaourt"
+#   become_method: "su"
+#   tags:
+#     - update
+#     - upgrade
