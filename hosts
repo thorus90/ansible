@@ -20,6 +20,7 @@ bind9
 bind
 dhcpd
 apache2
+docker2
 
 [server-dhcpd]
 pi 

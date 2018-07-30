@@ -17,6 +17,8 @@ bind9
 bind
 dhcpd
 apache2
+openvpn
+docker2
 
 [linux-client-rmg]
 buero-pi

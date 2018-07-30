@@ -9,6 +9,14 @@ common:
     - perl-image-exiftool
   network:
     subnet: '192.168.100.0/24'
+  users:
+    - name: root
+      homedir: '/root/'
+      ssh_keys:
+        - backup
+        - monitoring
+        - search
+        - mugnipper
 networksystemd:
     dhcp: True
 network:

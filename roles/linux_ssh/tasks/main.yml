@@ -1,3 +1,13 @@
+- name: "make sure ~/.ssh exists"
+  file:
+    state: "directory"
+    mode: 0700
+    path: "{{ item.homedir }}.ssh"
+    owner: "{{ item.name }}"
+    group: root
+  with_items:
+    - "{{ common.users }}"
+
 - name: "deploy ssh_keys for every user"
   template:
     src: "ssh_keys"
