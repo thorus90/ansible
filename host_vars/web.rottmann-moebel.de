@@ -26,7 +26,7 @@ apache:
     - domain: "rottmann-moebel.de"
       ip: "185.233.105.67"
       state: "enable"
-      ssl_only: False
+      ssl_only: True
       php: True
       ssl_cert: "/etc/letsencrypt/live/www.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/www.rottmann-moebel.de/privkey.pem"
