@@ -10,7 +10,6 @@ buero-hv-02 proxmox=True
 street-pi
 privat-sarah-hv proxmox=True
 privat-leo-receiver
-zoneminder
 web.rottmann-moebel.de
 mysql
 bind9
