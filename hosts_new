@@ -1,6 +1,5 @@
 [linux-server-rmg]
 minecraft
-template
 server-backup
 samba
 squid

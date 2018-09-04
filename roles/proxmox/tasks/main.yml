@@ -2,13 +2,14 @@
   lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4['address'] }} {{ ansible_fqdn }} {{ ansible_hostname }} pvelocalhost" regexp="^{{ ansible_default_ipv4['address'] }}"
 
 - name: APT | Key
-  apt_key: url="http://download.proxmox.com/debian/key.asc"
+  apt_key: url="http://download.proxmox.com/debian/proxmox-ve-release-5.x.gpg"
 
 - name: APT | Repository
   apt_repository: repo="deb http://download.proxmox.com/debian stretch pve-no-subscription"
 
 - name: APT | Installation
-  apt: name=proxmox-ve
+  apt: 
+    name: proxmox-ve
 
 - name: APT | Entferne PVE Enterprise Repository
   file: path=/etc/apt/sources.list.d/pve-enterprise.list state=absent

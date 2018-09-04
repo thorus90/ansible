@@ -1,6 +1,5 @@
 [server-arch]
 minecraft
-template.intranet.jr0.de
 server-backup
 seafile
 samba
@@ -8,7 +7,8 @@ squid
 
 [server-debian]
 checkmk.intranet.jr0.de
-buero-hv-01.intranet.jr0.de
+buero-hv-01
+buero-hv-02
 pi
 street-pi
 privat-sarah-hv.intranet.jr0.de
@@ -42,7 +42,6 @@ minecraft.intranet.jr0.de
 mysql.intranet.jr0.de
 seafile.intranet.jr0.de
 server-backup
-template.intranet.jr0.de
 squid
 
 

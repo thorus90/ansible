@@ -51,17 +51,6 @@ apache:
       ssl_cert: "/etc/apache2/ssl/2014/kimai.jr0.de/domain.crt"
       ssl_key: "/etc/apache2/ssl/2014/kimai.jr0.de/domain.key"
       include: False
-    - domain: "seafile.rottmann-moebel.de"
-      listen_http: "*:80 *:8080"
-      listen_https: "*:443 *:8081"
-      ip: "*"
-      state: "enable"
-      ssl_only: True
-      php: True
-      ssl_cert: "/etc/letsencrypt/live/seafile.rottmann-moebel.de/cert.pem"
-      ssl_key: "/etc/letsencrypt/live/seafile.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/seafile.rottmann-moebel.de/fullchain.pem"
-      include: True
     - domain: "user.rottmann-moebel.de"
       listen_http: "*:80 *:8080"
       listen_https: "*:443 *:8081"
