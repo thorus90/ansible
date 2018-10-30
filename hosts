@@ -20,6 +20,7 @@ bind
 dhcpd
 apache2
 docker2
+docker1
 
 [server-dhcpd]
 pi 
@@ -69,3 +70,6 @@ web.rottmann-moebel.de
 
 [check_mk]
 checkmk.intranet.jr0.de
+
+[openwrt]
+192.168.99.226

@@ -17,6 +17,7 @@ dhcpd
 apache2
 openvpn
 docker2
+docker1
 
 [linux-client-rmg]
 buero-pi

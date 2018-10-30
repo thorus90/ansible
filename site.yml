@@ -76,4 +76,4 @@
   hosts: openwrt
   remote_user: root
   roles:
-    - isc-dhcpd
+    - common
