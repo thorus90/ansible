@@ -19,6 +19,17 @@ apache:
       ssl_key: "/etc/letsencrypt/live/bitwarden.rottmann-moebel.de/privkey.pem"
       ssl_chain: "/etc/letsencrypt/live/bitwarden.rottmann-moebel.de/fullchain.pem"
       include: True
+    - domain: "chat.rottmann-moebel.de"
+      listen_http: "*:80 *:8080"
+      listen_https: "*:443 *:8081"
+      ip: "*"
+      state: "enable"
+      ssl_only: True
+      php: False
+      ssl_cert: "/etc/letsencrypt/live/chat.rottmann-moebel.de/cert.pem"
+      ssl_key: "/etc/letsencrypt/live/chat.rottmann-moebel.de/privkey.pem"
+      ssl_chain: "/etc/letsencrypt/live/chat.rottmann-moebel.de/fullchain.pem"
+      include: True
     - domain: "home.rottmann-moebel.de"
       listen_http: "*:80 *:8080"
       listen_https: "*:443 *:8081"

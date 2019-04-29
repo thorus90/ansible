@@ -40,5 +40,9 @@ linux-client-jr
 [windows-clients-rmg]
 buero-renate
 
+[windows-clients-jh1]
+thorus-pc
+
 [windows:children]
 windows-clients-rmg
+windows-clients-jh1

@@ -3,6 +3,7 @@ common:
     - name: root
       homedir: '/root/'
       ssh_keys:
+        - sarah
         - mugnipper
         - backup
         - monitoring

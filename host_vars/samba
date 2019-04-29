@@ -17,6 +17,7 @@ common:
         - monitoring
         - search
         - mugnipper
+        - sarah
 networksystemd:
     dhcp: True
 network:
