@@ -1,0 +1,51 @@
+- user:
+    name: root
+    shell: /bin/bash
+
+- template:
+    src: privat-sarah-router/network
+    owner: root
+    group: root
+    mode: 0644
+    dest: "/etc/config/network"
+
+- opkg:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim-full
+    - isc-dhcp-server-ipv4
+    - ss
+
+- template:
+    src: privat-sarah-router/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0644
+    dest: "/etc/dhcpd.conf"
+
+- service:
+    name: dhcpd
+    enabled: yes
+    state: started
+
+- template:
+    src: privat-sarah-router/firewall
+    dest: /etc/config/firewall
+    owner: root
+    group: root
+    mode: 0644  
+
+- template:
+    src: privat-sarah-router/wireless
+    dest: /etc/config/wireless
+    owner: root
+    group: root
+    mode: 0644  
+
+- template:
+    src: privat-sarah-router/dhcp
+    dest: /etc/config/dhcp
+    owner: root
+    group: root
+    mode: 0644  

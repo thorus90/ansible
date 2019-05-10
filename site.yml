@@ -76,4 +76,5 @@
   hosts: openwrt
   remote_user: root
   roles:
+    - turris
     - common

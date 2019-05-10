@@ -1,0 +1,4 @@
+- raw: opkg update && opkg install python
+
+- include_tasks: "privat-sarah-router.yml"
+  when: ansible_host == "192.168.201.20"

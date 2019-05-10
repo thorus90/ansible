@@ -1,0 +1,47 @@
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel '36'
+	option country 'CZ'
+	option hwmode '11a'
+	option path 'soc/soc:pcie-controller/pci0000:00/0000:00:02.0/0000:02:00.0'
+	option htmode 'VHT80'
+	option txpower '20'
+	option log_level '3'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'wlan-rottmann'
+	option hidden '0'
+	option encryption 'psk2+tkip+aes'
+	option key 'Phaich0u'
+	option network 'lan'
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option country 'CZ'
+	option hwmode '11g'
+	option path 'soc/soc:pcie-controller/pci0000:00/0000:00:01.0/0000:01:00.0'
+	option htmode 'HT20'
+	option channel '1'
+	option disabled '0'
+	option txpower '20'
+	option log_level '3'
+
+config wifi-iface
+	option device 'radio1'
+	option mode 'ap'
+	option disabled '0'
+	option ssid 'wlan-rottmann'
+	option hidden '0'
+	option encryption 'psk2+tkip+aes'
+	option key 'Phaich0u'
+	option network 'lan'
+	option wpa_group_rekey '86400'
+
+config wifi-iface 'guest_iface_1'
+	option disabled '1'
+	option device 'radio1'
+
+

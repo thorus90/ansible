@@ -49,10 +49,11 @@ fi
 # * /
 alias sshzeddi="ssh h2110162.stratoserver.net"
 
-
+{% if ansible_distribution != "OpenWrt" %}
 hostname=$(hostname)
 
 if [[ "$hostname" == "pi" ]]
 then
     alias pacmd="sudo PULSE_RUNTIME_PATH=/var/run/pulse -u pulse pacmd"
 fi
+{% endif %}
