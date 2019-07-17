@@ -12,7 +12,7 @@ AllowAgentForwarding yes
 PermitUserEnvironment yes
 X11Forwarding yes
 AcceptEnv LANG LC_*
-{% if proxmox %}
+{% if proxmox is defined and proxmox %}
 AcceptEnv LC_PVE_*
 {% endif %}
 

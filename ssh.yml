@@ -3,3 +3,9 @@
   remote_user: root
   roles:
     - linux_ssh
+
+- name: configure ssh
+  hosts: openwrt
+  remote_user: root
+  roles:
+    - linux_ssh

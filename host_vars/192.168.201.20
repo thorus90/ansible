@@ -1,0 +1,11 @@
+common:
+  additional_packages:
+  users:
+    - name: root
+      homedir: '/root/'
+      ssh_keys:
+        - backup
+        - monitoring
+        - search
+        - mugnipper
+        - sarah

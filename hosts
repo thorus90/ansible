@@ -6,7 +6,6 @@ samba
 squid
 
 [server-debian]
-checkmk.intranet.jr0.de
 buero-hv-01
 buero-hv-02
 pi
@@ -67,9 +66,6 @@ pi gather_subset=!hardware
 
 [firewall-drummer]
 web.rottmann-moebel.de
-
-[check_mk]
-checkmk.intranet.jr0.de
 
 [openwrt]
 192.168.201.20
