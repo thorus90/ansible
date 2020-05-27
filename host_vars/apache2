@@ -17,7 +17,6 @@ apache:
       php: False
       ssl_cert: "/etc/letsencrypt/live/bitwarden.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/bitwarden.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/bitwarden.rottmann-moebel.de/fullchain.pem"
       include: True
     - domain: "chat.rottmann-moebel.de"
       listen_http: "*:80 *:8080"
@@ -28,7 +27,6 @@ apache:
       php: False
       ssl_cert: "/etc/letsencrypt/live/chat.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/chat.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/chat.rottmann-moebel.de/fullchain.pem"
       include: True
     - domain: "home.rottmann-moebel.de"
       listen_http: "*:80 *:8080"
@@ -71,7 +69,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/user.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/user.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/user.rottmann-moebel.de/fullchain.pem"
       include: True
     - domain: "wiki.rottmann-moebel.de"
       listen_http: "*:80 *:8080"
@@ -82,7 +79,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/wiki.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/wiki.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/wiki.rottmann-moebel.de/fullchain.pem"
       include: False
     - domain: "i-doit.intranet.jr0.de"
       ip: "*"
@@ -102,7 +98,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/nextcloud.intranet.jr0.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/nextcloud.intranet.jr0.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/nextcloud.intranet.jr0.de/fullchain.pem"
       include: False
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
