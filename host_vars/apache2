@@ -87,7 +87,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/i-doit.intranet.jr0.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/i-doit.intranet.jr0.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/i-doit.intranet.jr0.de/fullchain.pem"
       include: False
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"

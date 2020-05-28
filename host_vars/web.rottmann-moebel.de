@@ -9,20 +9,6 @@ apache:
   php: True
   perl: False
   vhosts:
-    - domain: "forum.rottmann-moebel.de"
-      aliases:
-        - "forum.derbienenkorb.de"
-        - "leon.rottmann-moebel.de"
-      ip: "185.233.105.67"
-      state: "enable"
-      ssl_only: True
-      php: True
-      ssl_cert: "/etc/letsencrypt/live/forum.derbienenkorb.de/cert.pem"
-      ssl_key: "/etc/letsencrypt/live/forum.derbienenkorb.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/forum.derbienenkorb.de/fullchain.pem"
-      include: False
-      php_executable: "/usr/bin/php-cgi"
-      php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
     - domain: "rottmann-moebel.de"
       ip: "185.233.105.67"
       state: "enable"
@@ -30,7 +16,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/www.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/www.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/www.rottmann-moebel.de/fullchain.pem"
       include: False
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
@@ -61,7 +46,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/shop.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/shop.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/shop.rottmann-moebel.de/fullchain.pem"
       include: False
       php_executable: "/opt/php-5.5/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
@@ -102,7 +86,6 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/fullchain.pem"
       include: False
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
@@ -113,14 +96,12 @@ apache:
       php: True
       ssl_cert: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/cert.pem"
       ssl_key: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/privkey.pem"
-      ssl_chain: "/etc/letsencrypt/live/webmail.rottmann-moebel.de/fullchain.pem"
       include: False
       php_executable: "/usr/bin/php-cgi"
       php_ini_disable_functions: "pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_getpriority,pcntl_setpriority,passthru,shell_exec,system,popen,multi_exec,show_source"
 
 mysqld:
   dbs:
-    - leon_forum
     - blog_rottmann_moebel_de
     - magento
     - mon_check 
@@ -128,17 +109,6 @@ mysqld:
     - kpanel
     - roundcube
   users:
-    - name: leon_forum
-      host: '%'
-      password: !vault |
-            $ANSIBLE_VAULT;1.1;AES256
-            31313438356238306133333231393532323836633236306236323333306431653465326332653363
-            3835306264666533663265353564653436653461613336380a363635386161636435666134343362
-            64366366376235386339316562323836356663353861653331623733336230313735663332383462
-            6537363836636638660a313139316266646466353133343838633935633634326133643434653132
-            62313261343338396631373434323062633031306332333563666563393063386238353339326465
-            3635626666343632393462346539646339373763396238333637
-      priv: "leon_forum.*:ALL"
     - name: icinga
       host: localhost
       password: !vault |
